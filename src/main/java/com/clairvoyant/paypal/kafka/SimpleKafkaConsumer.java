@@ -20,27 +20,11 @@ public class SimpleKafkaConsumer {
 
         Config config = ConfigFactory.load();
 
-        String BOOTSTRAP_SERVERS = config.getString("kafka.brokers");
-        String GROUP_ID = config.getString("kafka.group_id");
         String CONSUMER_TOPIC = config.getString("kafka.consumer_topic");
-        String KEY_DESERIALIZER = config.getString("kafka.key_deserializer");
-        String VALUE_DESERIALIZER = config.getString("kafka.value_deserializer");
-        String KAFKA_OFFSET_RESET = config.getString("kafka.auto_offset_reset");
 
-        LOGGER.info("BOOTSTRAP_SERVERS: " + BOOTSTRAP_SERVERS);
-        LOGGER.info("GROUP_ID: " + GROUP_ID);
         LOGGER.info("CONSUMER_TOPIC: " + CONSUMER_TOPIC);
-        LOGGER.info("KEY_DESERIALIZER: " + KEY_DESERIALIZER);
-        LOGGER.info("VALUE_DESERIALIZER: " + VALUE_DESERIALIZER);
 
-        Properties props = new Properties();
-        props.put("bootstrap.servers", BOOTSTRAP_SERVERS);
-        props.put("group.id", GROUP_ID);
-        props.put("auto.offset.reset", KAFKA_OFFSET_RESET);
-        props.put("key.deserializer", KEY_DESERIALIZER);
-        props.put("value.deserializer", VALUE_DESERIALIZER);
-
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(Configurations.getConsumerProperties());
         consumer.subscribe(Collections.singletonList(CONSUMER_TOPIC));
 
         while (true) {
