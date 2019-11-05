@@ -4,8 +4,6 @@
     "group_id": "test",
     "consumer_topic": "test1",
     "producer_topic": "test1",
-    "auto_offset_reset": "earliest",
-    "key_deserializer": "org.apache.kafka.common.serialization.StringDeserializer",
-    "value_deserializer": "org.apache.kafka.common.serialization.StringDeserializer"
+    "auto_offset_reset": "earliest"
   }
 }
